@@ -20,11 +20,23 @@ use onebone\economyapi\EconomyAPI;
 
 class Main extends PluginBase{
 	public $tag = "§6♥ §aS§bP§dN§e VN§6 ♥§r";
+        public $enable = false;
 	
 	public function onEnable(){
 		$this->getServer()->getLogger()->info($this->tag . " §l§aEnable MuaZCoin System....");
 		$this->point = $this->getServer()->getPluginManager()->getPlugin("PointAPI");
 		$this->money = $this->getServer()->getPluginManager()->getPlugin("EconomyAPI");
+                $this->eco = EconomyAPI::getInstance();
+                If($this->money === null and $this->point === null){
+                   $this->enable = false;
+	           $this->getServer()->getLogger()->info($this->tag . "§c Bạn chắc rằng bạn đã cài plugin EconomyAPI và PointAPI từ pogit chưa ?");
+		   $this->getServer()->shutdown();
+		   return;
+		}
+                if($this->enable = true){
+	           $this->getServer()->getLogger()->info($this->tag . "§aPlugin is Enable!");
+		   $this->getServer()->getPluginManager()->registerEvents($this, $this);
+                }
 	}
 	
 	public function onLoad(): void{
